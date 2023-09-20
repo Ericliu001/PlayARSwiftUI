@@ -20,6 +20,7 @@ struct ARViewContainer: UIViewRepresentable {
     var arViewModel: ARViewModel
     
     func makeUIView(context: Context) -> ARView {
+        arViewModel.startSessionDelegate()
         return arViewModel.arView
     }
     

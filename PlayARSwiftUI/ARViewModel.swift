@@ -10,7 +10,7 @@ import RealityKit
 import ARKit
 
 
-class ARViewModel:UIViewController,  ObservableObject, ARSessionDelegate {
+class ARViewModel: UIViewController,  ObservableObject, ARSessionDelegate {
     @Published private var model: ARModel = ARModel()
     
     var arView : ARView {
@@ -45,6 +45,11 @@ class ARViewModel:UIViewController,  ObservableObject, ARSessionDelegate {
     }
     
     func onAnchorUpdated(anchors: [ARAnchor]){
-        print("ericliu: \(anchors)")
+        for anchor in anchors {
+                    if let faceAnchor = anchor as? ARFaceAnchor {
+                        // This is a face anchor, do your updates here
+                        print("Face anchor updated: \(faceAnchor)")
+                    }
+                }
     }
 }

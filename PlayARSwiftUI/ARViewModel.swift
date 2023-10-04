@@ -29,10 +29,10 @@ class ARViewModel: UIViewController,  ObservableObject, ARSessionDelegate {
      @param session The session being run.
      @param anchors An array of added anchors.
      */
-     func session(_ session: ARSession, didAdd anchors: [ARAnchor]){
-        onAnchorUpdated(anchors: anchors)
-    }
-
+    //    func session(_ session: ARSession, didAdd anchors: [ARAnchor]){
+    //        onAnchorUpdated(anchors: anchors)
+    //    }
+    //
     
     /**
      This is called when anchors are updated.
@@ -40,16 +40,14 @@ class ARViewModel: UIViewController,  ObservableObject, ARSessionDelegate {
      @param session The session being run.
      @param anchors An array of updated anchors.
      */
-     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]){
-         onAnchorUpdated(anchors: anchors)
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]){
+        onAnchorUpdated(anchors: anchors)
     }
     
     func onAnchorUpdated(anchors: [ARAnchor]){
-        for anchor in anchors {
-                    if let faceAnchor = anchor as? ARFaceAnchor {
-                        // This is a face anchor, do your updates here
-                        print("Face anchor updated: \(faceAnchor)")
-                    }
-                }
+        anchors.compactMap { $0 as? ARFaceAnchor }.forEach {faceAnchor in
+            // This is a face anchor, do your updates here
+            print("Face anchor updated: \(faceAnchor)")
+        }
     }
 }
